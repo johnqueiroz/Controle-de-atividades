@@ -1,0 +1,84 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 0;
+    font-size: 14px;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-image: url('../Trabalho/bg2.png');
+    background-repeat: no-repeat;
+}
+
+.container{
+display: flex;
+padding: 0;
+flex-direction: column;
+align-items: center;
+justify-content: space-around;
+width: 16%;
+border: 4px lightgray;
+background-color:#3b5480;
+margin-top: 13%;
+margin-bottom: 14%;
+margin-right: 19%;
+border-radius: 10px;
+}
+
+
+.titulo{
+    margin-top: 175px;
+    margin-left: 200px;
+    color: rgb(4, 4, 61);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:50px;
+
+}
+
+.descricao{
+    margin-left: 250px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(4, 4, 61);
+    margin-right: 450px;
+    font-size: 35px;
+}
+
+.logo_vm img{
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 25%;
+}
+
+.form{
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pad{
+    padding-top: 4px;
+    opacity: 0.6;
+    -moz-opacity: 0.6;
+    filter: alpha(opacity=60);
+    -khtml-opacity: 0.6;
+   
+}
+.bord{
+    border: 3px solid black;
+}
+
+.botao{
+    margin-top: 20px;
+    width: 80%;
+}
