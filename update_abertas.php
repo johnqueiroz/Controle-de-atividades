@@ -44,6 +44,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -73,6 +75,8 @@
   .dropdown:hover .dropdown-content {
 	display: block;
   }
+
+  
 
     </style>
 </head>
@@ -139,6 +143,8 @@
                                 echo ("inválido"); 
                             } 
                               
+                           
+
                               ?></option>
                               <option value="1">Desenvolvimento</option>
                               <option value="2">Atendimento</option>
@@ -167,15 +173,15 @@
                             <select name="listagem" class="form-control">
                             <option selected><?php
                               
-                              if($listagem == "0"){
-                                echo("Atividade concluída");
+                              if($listagem == "1"){
+                                echo("Atividade aberta");
                             }else{
-                              echo ("Atividade aberta"); 
+                              echo ("Atividade concluída"); 
                             }
                               ?></option>
                               
                              
-                              <option value="1">Atividade aberta</option>
+                              <option value="0">Atividade concluída</option>
                             </select>
 
 
@@ -200,9 +206,25 @@
       <form  name="form_delete_atividades" action="delete_atividades_abertas.php" method="POST">
             <div class="form-group col-md-3">
 
-                <input type="submit"  style=" margin-top: -98px; margin-left:400px;" class="btn btn-danger" value="Deletar">
+           <?php
+
+      if($tipo == 4){
+         echo '<input type="submit" disabled style=" margin-top: -98px; margin-left:400px;"  class="btn btn-danger"  value="Deletar">';
+      }else{
+        echo '<input type="submit" style=" margin-top: -98px; margin-left:400px;"  class="btn btn-danger"  value="Deletar">';
+      }
+
+
+           ?>
+      
+         
+
+
+
+          
 
             </div>
+            <input name="tipo" autocomplete="off" type="hidden" class="form-control" value="<?php echo $tipo;  ?>"  >
 
             <input name="id" autocomplete="off" type="hidden" class="form-control" value="<?php echo $id;  ?>"  >
             </form>

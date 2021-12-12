@@ -1,12 +1,14 @@
 <?php 
 
+/* inicia a sessão na pagina. caso o usuário já esteja logado impede que ele volte para pagina de cadastro de atividades*/
+
  session_start();
  if (isset($_SESSION['UsuarioLog'])){
-       header("Location: dashboard.php");
+       header("Location: cadastro_atividades.php");
        die();
  }
 ?>
-  ?>
+  
 
   <!DOCTYPE html>
   <html lang="pt-br">
@@ -25,23 +27,25 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Controle de atividades - Cadastro</title>
   </head>
-  <body>
+<body>
 
                    
-  <main>
-<h3 class="titulo">Sistema de controle de atividade.</h3>
+      <main>
+            <h3 class="titulo">Sistema de controle de atividade.</h3>
 
-<p class="descricao"> Para ter mais controle nas tarefas no seu trabalho!</p>
+                  <p class="descricao"> Para ter mais controle nas tarefas no seu trabalho!</p>
 
 
-   </main>
-  <div class="container">
+      </main>
+
+      <!--  Container onde vão estar os campos do formulário  -->
+      <div class="container">
   
         <div class="logo_vm">
             <img src="vm.png" alt="Logo do Grupo">
         </div>       
 
-         <!-- Formulário para envio de informações de login com siape e senha -->
+         <!-- Formulário para envio de informações do cadastro de usuário -->
         <form class="form" name="form_cadastro" action="cadastro_sistema.php" method="POST">
 
         <div class="pad">
@@ -64,6 +68,8 @@
                   <input type="submit" class="btn botao" value="Cadastrar">
                
         </form>
+
+<!--  Link para voltar a pág de login  -->
 
         <a href="index.php" class="a">Voltar para login!</a>
 

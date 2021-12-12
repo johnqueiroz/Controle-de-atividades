@@ -15,23 +15,35 @@
       $conexao = mysqli_connect('localhost', 'root', '12345', 'controle_atividades');
 
       $id = $_POST['id'];
+      $tipo = $_POST['tipo'];
 
-      $sql = "DELETE FROM atividades WHERE id = '$id'";
+
       
-      $result_delete = mysqli_query($conexao, $sql);
-      $linha = mysqli_affected_rows($conexao);
+      if($tipo == 4){
+
+        echo '<script type="text/javascript"> alert("Tarefa de manutenção urgente não pode ser deletada.");</script>';
+        echo'<script type="text/javascript">window.location = "listar_atv_abertas.php"</script>';
+     
+      }else{
+        $sql = "DELETE FROM atividades WHERE id = '$id'";
       
-      if($linha == 1){
+        $result_delete = mysqli_query($conexao, $sql);
+        $linha = mysqli_affected_rows($conexao);
         
-        header("Location:listar_atv_abertas.php");
+        if($linha == 1){
+          
+          header("Location:listar_atv_abertas.php");
+           
+          
+        }else{
+        
+          header("Location:update_atv_aberta.php");
          
         
-      }else{
-      
-        header("Location:update_atv_aberta.php");
-       
-      
+        }
       }
+
+ 
 
 
       ?>

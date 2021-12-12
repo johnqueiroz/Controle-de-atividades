@@ -28,7 +28,9 @@
         $listagem = 0;
     }
 
-    /*if($tipo_atividade == "Desenvolvimento"){
+
+
+    if($tipo_atividade == "Desenvolvimento"){
         $tipo_atividade = '1';
     }elseif($tipo_atividade == "Atendimento"){
         $tipo_atividade = '2';
@@ -38,29 +40,59 @@
         $tipo_atividade = '4';
     }
 
-*/
 
-        $sql = "UPDATE atividades SET titulo = '$titulo', tipo = '$tipo_atividade', descricao = '$descricao', listagem = '$listagem' WHERE id = '$id'";
-      
-        $result_update_aberta = mysqli_query($conexao, $sql)  or (' Erro na query:' . $sql . ' ' . mysqli_error($conexao));
-        $linha = mysqli_affected_rows($conexao);
-        
-        if($linha == 1){
-          
-          header("Location:listar_atv_abertas.php");
-           
-          
-        }else{
-        
-            echo '<script type="text/javascript"> alert("Dados incorretos ou iguais, repita o processo");</script>';
+
+
+    $descricao;
+    $contString = strlen($descricao);
+
+if (($contString < 50) and ($listagem == 0)) {
+        if($tipo_atividade == 2 or $tipo_atividade == 4){
+
+            echo '<script type="text/javascript"> alert("Insira mais caracteres na descrição.");</script>';
             echo'<script type="text/javascript">window.location = "listar_atv_abertas.php"</script>';
-         
-        
+        }else{
+
+            $sql = "UPDATE atividades SET titulo = '$titulo', tipo = '$tipo_atividade', descricao = '$descricao', listagem = '$listagem' WHERE id = '$id'";
+      
+            $result_update_aberta = mysqli_query($conexao, $sql)  or (' Erro na query:' . $sql . ' ' . mysqli_error($conexao));
+            $linha = mysqli_affected_rows($conexao);
+            
+            if($linha == 1){
+              
+              header("Location:listar_atv_abertas.php");
+               
+              
+            }else{
+            
+                echo '<script type="text/javascript"> alert("Dados incorretos ou iguais, repita o processo");</script>';
+                echo'<script type="text/javascript">window.location = "listar_atv_abertas.php"</script>';
+             
+            
+            }
+
+
         }
-  
+}else{
+    $sql = "UPDATE atividades SET titulo = '$titulo', tipo = '$tipo_atividade', descricao = '$descricao', listagem = '$listagem' WHERE id = '$id'";
+      
+    $result_update_aberta = mysqli_query($conexao, $sql)  or (' Erro na query:' . $sql . ' ' . mysqli_error($conexao));
+    $linha = mysqli_affected_rows($conexao);
     
+    if($linha == 1){
+      
+      header("Location:listar_atv_abertas.php");
+       
+      
+    }else{
+    
+        echo '<script type="text/javascript"> alert("Dados incorretos ou iguais, repita o processo");</script>';
+        echo'<script type="text/javascript">window.location = "listar_atv_abertas.php"</script>';
+     
+    
+    }
 
-    
-    
 
+}
+ 
       ?>

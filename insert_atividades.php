@@ -1,6 +1,6 @@
 <?php
 
-// inicia a sessao na pagina e é preciso ter em todas as outras para continuar na mesma sessao
+/* inicia a sessão na página. Caso o usuário não esteja logado retorna ele para pagina de index.php.*/
 session_start();
 
 if (!isset($_SESSION['UsuarioLog'])){
@@ -8,23 +8,25 @@ if (!isset($_SESSION['UsuarioLog'])){
     die();
 }
 
+//Cria a conexão com o banco
 $conexao = mysqli_connect('localhost', 'root', '12345', 'controle_atividades');
 
-$titulo = $_POST['titulo'];
-$tipo_atividade = $_POST['tipo_atividade'];
-$descricao = $_POST['descricao'];
-$listagem = 1;
+//variáveis que recebem os dados enviados pelo formulário.
+    $titulo = $_POST['titulo'];
+    $tipo_atividade = $_POST['tipo_atividade'];
+    $descricao = $_POST['descricao'];
+    $listagem = 1;
 
 
-date_default_timezone_set('America/Sao_Paulo');
+date_default_timezone_set('America/Sao_Paulo'); //seta o horário com o de São Paulo.
 $agora = new DateTime(); // Pega o momento atual
 //echo $agora->format('d/m/Y H:i'); // Exibe no formato desejado
 
 //echo date('w');
 //echo date('G');
 
-
-
+/*caso o dia seja sábado = 6 ou domingo = 0 e o tipo de atividade for 4 = manutenção urgente, vai impedir de criar a manutenção
+ nos fins de semana. Caso não esteja nessas condições, o sistema vai inserir a atividade no banco de dados.*/
 if(date('w') == 0 or date('w') == 6) { 
     if($tipo_atividade == 4){
 

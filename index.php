@@ -1,5 +1,6 @@
 <?php 
-// inicia a sessao na pagina e é preciso ter em todas as outras para continuar na mesma sessao
+/* inicia a sessão na pagina. caso o usuário já esteja logado impede que ele volte para pagina de login*/
+
  session_start();
       if (isset($_SESSION['UsuarioLog'])){
             header("Location: cadastro_atividades.php");
@@ -31,19 +32,19 @@
 
                    
 <main>
-<h1 class="titulo">A revolução criada no agronegócio</h1>
+            <h1 class="titulo">A revolução criada no agronegócio</h1>
 
-<p class="descricao">Grupo Via Máquinas, 10 anos no campo da evolução.</p>
+            <p class="descricao">Grupo Via Máquinas, 10 anos no campo da evolução.</p>
 
 
    </main>
-  <div class="container">
+            <div class="container">
   
-        <div class="logo_vm">
-            <img src="vm.png" alt="Logo do Grupo">
-        </div>       
+                        <div class="logo_vm">
+                                <img src="vm.png" alt="Logo do Grupo">
+                        </div>       
 
-         <!-- Formulário para envio de informações de login com siape e senha -->
+         <!-- Formulário para envio de informações de login(CPF) e senha -->
         <form class="form" name="form_entrada" action="entrada_sistema.php" method="POST">
 
         <div class="pad">
@@ -58,7 +59,7 @@
                   <input type="submit" class="btn botao" value="Acessar">
                
         </form>
-
+<!--  Link para cadastro de novos usuários  -->
         <a href="cadastro_user.php" class="a">Não é cadastrado? Clique aqui!</a>
 
   </div>
