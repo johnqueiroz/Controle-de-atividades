@@ -1,41 +1,52 @@
 <?php 
     session_start();
+
+    /* inicia a sessão na pagina. caso o usuário não esteja logado retorna ele para pagina de index.php.*/
       if (!isset($_SESSION['UsuarioLog'])){
             header("Location: index.php");
             session_destroy();
       }
 
+      // caso receba o deslogar, o sistema vai desrtuir a sessão do usuário e retornar ele para o index.php.
       if(isset($_GET['deslogar'])){
           session_destroy();
           header("Location: index.php");
       }
 
+       // verifica se o ID vindo do formulário está vazio ou não.
       if(!empty($_GET['id'])){
 
-       $id = $_GET['id'];
+      //recupera o id do formulário anterior.
+            $id = $_GET['id'];
 
-        $conexao = mysqli_connect('localhost', 'root', '12345', 'controle_atividades');
+      //cria a conexão com o banco.
+              $conexao = mysqli_connect('localhost', 'root', '12345', 'controle_atividades');
 
-        $sql = "SELECT * FROM atividades WHERE id = '$id'";
+      //query para selecionar atividades por ID.
+              $sql = "SELECT * FROM atividades WHERE id = '$id'";
 
-        $result = $conexao->query($sql);
+      //faz a conexao do banco com a query.
+              $result = $conexao->query($sql);
 
-        if($result->num_rows >0){
-            while($user_data = mysqli_fetch_assoc($result)){
+      //se a query retornar > 0, alguma linha foi selecionada.
+              if($result->num_rows >0){
 
-                $titulo = $user_data['titulo'];
-                $descricao = $user_data['descricao'];
-                $tipo = $user_data['tipo'];
-                $listagem = $user_data['listagem'];
-                $id = $user_data['id'];
+                 //busca a linha do resultado com uma matriz associativa e coloca os dados dentro das variáveis respectivas.
+                  while($user_data = mysqli_fetch_assoc($result)){
+
+                      $titulo = $user_data['titulo'];
+                      $descricao = $user_data['descricao'];
+                      $tipo = $user_data['tipo'];
+                      $listagem = $user_data['listagem'];
+                      $id = $user_data['id'];
 
 
-            }
+                  }
 
-          
-        }else{
-            header("Location:listar_atv_conclu.php");
-        }
+              //se nenhuma linha for selecionada ele retorna para a listagem de atividades abertas pois não existe a atividade.
+              }else{
+                  header("Location:listar_atv_conclu.php");
+              }
 
       }
 
@@ -46,13 +57,19 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="estilo2.css" type="text/css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de atividades - Cadastro de atividades</title>
+
+   <!-- Cabeçalho da página -->
+      <head>
+
+              <!-- link para o boostrap -->
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+               <!-- link para o css -->
+          <link rel="stylesheet" href="estilo2.css" type="text/css">
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Controle de atividades - Cadastro de atividades</title>
 
     <style>
   .dropdown {
@@ -75,48 +92,48 @@
   }
 
     </style>
-</head>
+      </head>
 
 <body>
 
-<nav>
+        <nav>
 
-	<a  href="listar_atv_conclu.php">	<img class="logo" src="vm.png" alt="Logo do Grupo"></a>
+          <a  href="listar_atv_conclu.php">	<img class="logo" src="vm.png" alt="Logo do Grupo"></a>
 
-		<ul>
-		  	<li style="color:azure;"><?php echo "Bem-vindo(a), " . $_SESSION['nome'] . '!'; ?></li>
-		  	<li><a style="color:azure; text-transform:capitalize;" href="cadastro_atividades.php">Cadastrar</a></li>
-		  	<li><div class="dropdown">
-                <span style="color:azure;">Listar atividades</span>
-                   <div class="dropdown-content">
-                       <ul>
-                          <li><a href="listar_atv_abertas.php">Abertas</a></li>
-                          <li><a href="listar_atv_conclu.php">Concluídas</a></li>
-                       </ul>
-                  </div>
-            </div></li>
-		  	<li><a style="color:azure; text-transform:capitalize;" href="?deslogar">Sair</a></li>
-		</ul>
-</nav>
+            <ul>
+                <li style="color:azure;"><?php echo "Bem-vindo(a), " . $_SESSION['nome'] . '!'; ?></li> <!--recupera o nome do usuário para mostrar no menu-->
+                <li><a style="color:azure; text-transform:capitalize;" href="cadastro_atividades.php">Cadastrar</a></li>
+                <li><div class="dropdown">
+                        <span style="color:azure;">Listar atividades</span>
+                          <div class="dropdown-content">
+                              <ul>
+                                  <li><a href="listar_atv_abertas.php">Abertas</a></li>
+                                  <li><a href="listar_atv_conclu.php">Concluídas</a></li>
+                              </ul>
+                          </div>
+                    </div></li>
+                <li><a style="color:azure; text-transform:capitalize;" href="?deslogar">Sair</a></li>
+            </ul>
+        </nav>
 
 
 <main>
 
     <div>
 
-      <div><h2 style="padding-bottom:30px;">Edição da atividade "<?php echo $titulo;  ?>"</h2></div>
+      <div><h2 style="padding-bottom:30px;">Edição da atividade "<?php echo $titulo;  ?>"</h2></div> <!--recupera o nome da atividade para mostrar no topo do main-->
 
+
+        <!--formulário que recebe os dados da atividade que clicada para ser editada-->
         <form name="form_update_atividades" action="update_atividades.php" method="POST">
-
-           
-
 
              <div class="form-row">
 
                  <div class="form-group col-md-6">
 
                     <label for="inputTitulo"><b>Título da atividade</b></label>
-                    <input name="titulo" autocomplete="off" type="text" class="form-control" value="<?php echo $titulo;  ?>"  placeholder="Ex.: Um título qualquer">
+                    <input name="titulo" autocomplete="off" type="text" class="form-control" value="<?php echo $titulo; /*preenche o campo com o título 
+                    já existente da atividade*/ ?>"  placeholder="Ex.: Um título qualquer">
                  </div>
 
                 <div class="form-group col-md-6">
@@ -126,6 +143,8 @@
    
                            <select name="tipo_atividade" class="form-control">
                               <option selected><?php
+                              
+                            //preenche o campo com o tipo já existente da atividade e converte o tipo do banco para melhor visualização do usuário.
                               
                               if($tipo == "1"){
                                 echo("Desenvolvimento");
@@ -154,8 +173,11 @@
 
 
               <div class="mb-4">
+
+              
                         <label for="descricao_atividade" class="form-label"><b>Descrição da atividade</b></label>
-                        <textarea type="input" class="form-control" name="descricao" rows="4"><?php echo $descricao; ?></textarea>
+                        <textarea type="input" class="form-control" name="descricao" rows="4"><?php echo $descricao; 
+    // preenche o textarea com as informações já disponíveis do campo no banco. OBS: precisa ser feito fora da tag, não aceita no value. ?></textarea>
               </div>
 
 
@@ -166,7 +188,9 @@
 
                             <select name="listagem" class="form-control">
                             <option selected><?php
-                              
+
+                                //preenche o campo com a listagem já existente da atividade e converte a listagem do banco para melhor visualização do usuário.
+
                               if($listagem == "0"){
                                 echo("Atividade concluída");
                             }else{
@@ -187,11 +211,11 @@
 
             </div>
 
+        <!-- campo do id "hidden" que recebe o id para enviar no formulário e o usuário não alterar -->
             <input name="id" autocomplete="off" type="hidden" class="form-control" value="<?php echo $id;  ?>">
 
             
-        </div>    
-
+        </div>
       
                   
       </form>
@@ -200,10 +224,17 @@
       <form  name="form_delete_atividades" action="delete_atividades.php" method="POST">
             <div class="form-group col-md-3">
 
-                <input type="submit"  style=" margin-top: -98px; margin-left:400px;" class="btn btn-danger" value="Deletar">
-
+          <?php
+              // Se o tipo for = 4 (manutenção urgente) ele não pode ser deletado, então o botão de deletar é desabilitado. Caso não, o botão fica habilitado.
+              if($tipo == 4){
+                  echo '<input type="submit" disabled style=" margin-top: -98px; margin-left:400px;"  class="btn btn-danger"  value="Deletar">';
+              }else{
+                  echo '<input type="submit" style=" margin-top: -98px; margin-left:400px;"  class="btn btn-danger"  value="Deletar">';
+              }
+          ?>
             </div>
-
+        
+            <!-- campo do id "hidden" que recebe o id para enviar no formulário e o usuário não alterar -->
             <input name="id" autocomplete="off" type="hidden" class="form-control" value="<?php echo $id;  ?>"  >
             </form>
 
@@ -214,7 +245,7 @@
         
 
 
-
+<!-- bootstrap -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
