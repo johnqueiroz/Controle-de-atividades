@@ -40,7 +40,10 @@
     date_default_timezone_set('America/Sao_Paulo'); //seta o horário com o de São Paulo.
     $agora = new DateTime(); // Pega o momento atual
 
-
+if(($tipo_atividade == 4) and date('N H:i') >'5 13:00'){
+    echo '<script type="text/javascript"> alert("Não pode criar manutenção urgente essa hora.");</script>';
+    echo'<script type="text/javascript">window.location = "listar_atv_abertas.php"</script>';
+}
 
     //Função que vê o tamanho da string enviada na descrição
     $contString = strlen($descricao);
@@ -54,6 +57,26 @@ if (($contString <= 50) and ($listagem == 0)) {
 
             echo '<script type="text/javascript"> alert("Insira mais caracteres na descrição.");</script>';
             echo'<script type="text/javascript">window.location = "listar_atv_abertas.php"</script>';
+        }else{
+
+            $sql = "UPDATE atividades SET titulo = '$titulo', tipo = '$tipo_atividade', descricao = '$descricao', listagem = '$listagem' WHERE id = '$id'";
+      
+            $result_update_aberta = mysqli_query($conexao, $sql)  or (' Erro na query:' . $sql . ' ' . mysqli_error($conexao));
+            $linha = mysqli_affected_rows($conexao);
+        
+             //se alguma linha do banco for afetada, a atualização ocorreu e encaminha para as listas abertas.
+            if($linha == 1){
+              
+              header("Location:listar_atv_abertas.php");
+               
+            //caso não seja alterado por algum motivo, vai ser emitido o alerta justificando a não alteração e depois encaminha para a pág de listas abertas
+            }else{
+            
+                echo '<script type="text/javascript"> alert("Dados incorretos ou iguais, repita o processo");</script>';
+                echo'<script type="text/javascript">window.location = "listar_atv_abertas.php"</script>';
+             
+            
+            }
         }
 
         

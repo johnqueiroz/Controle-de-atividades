@@ -27,7 +27,7 @@ $agora = new DateTime(); // Pega o momento atual
 
 /*caso o dia seja sábado = 6 ou domingo = 0 e o tipo de atividade for 4 = manutenção urgente, vai impedir de criar a manutenção
  nos fins de semana. Caso não esteja nessas condições, o sistema vai inserir a atividade no banco de dados.*/
-if(date('w') == 0 or date('w') == 6) { 
+if(date('N H:i') > '5 13:00') { 
     if($tipo_atividade == 4){
 
         echo '<script type="text/javascript"> alert("Não pode criar manutenção urgente nos fins de semana"); window.location = "cadastro_atividades.php"</script></script>';
@@ -50,8 +50,26 @@ if(date('w') == 0 or date('w') == 6) {
 
     
 
-}
-}
+    }   
+}else{
+
+    $sql = "INSERT INTO atividades (titulo, tipo, descricao, listagem) VALUES ('$titulo','$tipo_atividade', '$descricao', '$listagem')";
+
+    $cadastro_atividade = mysqli_query($conexao, $sql);
+    $linha = mysqli_affected_rows($conexao);
+    
+    if($linha == 1){
+        echo'<script type="text/javascript"> alert("Atividade !"); window.location = "cadastro_atividades.php"</script>';
+    }else{
+    
+        echo '<script type="text/javascript"> alert("Dados incorretos, repita o processo") window.location = "cadastro_atividades.php"</script>;</script>';
+     
+    
+    }
+
+
+
+} 
 
 
 

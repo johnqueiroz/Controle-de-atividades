@@ -59,7 +59,7 @@
 <!--Nav onde vai estar o menu superior-->
 
   <nav>
-<
+
 	    <a  href="cadastro_atividades.php">	<img class="logo" src="vm.png" alt="Logo do Grupo"></a>
 
 		    <ul>

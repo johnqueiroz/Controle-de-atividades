@@ -36,7 +36,10 @@
         $listagem = 1;
     }
 
-      echo $listagem;
+    if(($tipo_atividade == 4) and date('N H:i') >'5 13:00'){
+      echo '<script type="text/javascript"> alert("Não pode criar manutenção urgente essa hora.");</script>';
+      echo'<script type="text/javascript">window.location = "listar_atv_conclu.php"</script>';
+  }
        //Função que vê o tamanho da string enviada na descrição
        $contString = strlen($descricao);
 
