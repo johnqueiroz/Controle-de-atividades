@@ -59,7 +59,7 @@ if(date('N H:i') > '5 13:00') {
     $linha = mysqli_affected_rows($conexao);
     
     if($linha == 1){
-        echo'<script type="text/javascript"> alert("Atividade !"); window.location = "cadastro_atividades.php"</script>';
+        echo'<script type="text/javascript"> alert("Atividade criada!"); window.location = "cadastro_atividades.php"</script>';
     }else{
     
         echo '<script type="text/javascript"> alert("Dados incorretos, repita o processo") window.location = "cadastro_atividades.php"</script>;</script>';

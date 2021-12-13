@@ -131,8 +131,8 @@
 
                  <div class="form-group col-md-6">
 
-                    <label for="inputTitulo"><b>Título da atividade</b></label>
-                    <input name="titulo" autocomplete="off" type="text" class="form-control" value="<?php echo $titulo; /*preenche o campo com o título 
+                    <label for="titulo_edicao"><b>Título da atividade</b></label>
+                    <input name="titulo" id="titulo_edicao" autocomplete="off" type="text" class="form-control" value="<?php echo $titulo; /*preenche o campo com o título 
                     já existente da atividade*/ ?>"  placeholder="Ex.: Um título qualquer">
                  </div>
 
@@ -175,8 +175,8 @@
               <div class="mb-4">
 
               
-                        <label for="descricao_atividade" class="form-label"><b>Descrição da atividade</b></label>
-                        <textarea type="input" class="form-control" name="descricao" rows="4"><?php echo $descricao; 
+                        <label for="descricao_edicao" class="form-label"><b>Descrição da atividade</b></label>
+                        <textarea type="input" id="descricao_edicao" class="form-control" name="descricao" rows="4"><?php echo $descricao; 
     // preenche o textarea com as informações já disponíveis do campo no banco. OBS: precisa ser feito fora da tag, não aceita no value. ?></textarea>
               </div>
 
@@ -207,7 +207,7 @@
             </div>
             <div class="form-group col-md-3">
 
-              <input type="submit" style="margin-top:31px; margin-left:10px;" class="btn btn-primary" value="Editar">
+              <input type="submit" onclick="return validacao_edicao()" style="margin-top:31px; margin-left:10px;" class="btn btn-primary" value="Editar">
 
             </div>
 
@@ -243,6 +243,28 @@
   
 </main>
         
+<script>
+
+  function validacao_edicao(){
+
+    var titulo_edicao = form_update_atividades.titulo_edicao.value;
+    var descricao_edicao = form_update_atividades.descricao_edicao.value;
+
+    if(titulo_edicao == ""){
+      alert('Preencha o campo Título');
+      form_update_atividades.titulo_edicao.focus();
+      return false;
+    }
+    if(descricao_edicao == ""){
+      alert('Preencha o campo descrição');
+      form_update_atividades.descricao_edicao.focus();
+      return false;
+    }
+  }
+
+</script>
+
+
 
 
 <!-- bootstrap -->

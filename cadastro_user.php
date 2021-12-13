@@ -8,6 +8,7 @@
        die();
  }
 ?>
+
   
 
   <!DOCTYPE html>
@@ -49,23 +50,23 @@
         <form class="form" name="form_cadastro" action="cadastro_sistema.php" method="POST">
 
         <div class="pad">
-                  <input name="nome_cadastro" type="text" class="form-control mb-2 mr-sm-2 bord" placeholder="Digite seu nome:">
+                  <input name="nome_cadastro" for="nome" id="nome" type="text" class="form-control mb-2 mr-sm-2 bord" placeholder="Digite seu nome:">
         </div>
 
         <div class="pad">
-                  <input name="cpf_cadastro" type="text" class="form-control mb-2 mr-sm-2 bord" placeholder="Digite seu CPF:">
+                  <input name="cpf_cadastro" for="cpf" id="cpf" type="number" class="form-control mb-2 mr-sm-2 bord" placeholder="Digite seu CPF:">
         </div>
 
         <div class="input-group mb-2 pad">
-                    <input name="senha_cadastro" autocomplete="off" type="password" class="form-control bord" placeholder="Digite sua senha:">
+                    <input name="senha_cadastro"  for="senha" id="senha"autocomplete="off" type="password" class="form-control bord" placeholder="Digite sua senha:">
         </div>
 
         <div class="input-group mb-2 pad">
-                    <input name="senha_confirmacao" autocomplete="off" type="password" class="form-control bord" placeholder="Confirme sua senha:">
+                    <input name="senha_confirmacao" for="senha_confirm" id="senha_confirm" autocomplete="off" type="password" class="form-control bord" placeholder="Confirme sua senha:">
         </div>
                 
                  
-                  <input type="submit" class="btn botao" value="Cadastrar">
+                  <input type="submit" onclick="return validar()" class="btn botao" value="Cadastrar">
                
         </form>
 
@@ -78,7 +79,38 @@
                        
 
  
+<script>
+      // Validações feitas em javascript para os forumários de cadastramento dos usuários.
+      function validar(){
+            var nome = form_cadastro.nome.value;
+            var cpf = form_cadastro.cpf.value;
+            var senha = form_cadastro.senha.value;
+            var senha_confirm = form_cadastro.senha_confirm.value;
 
+            if(nome == ""){
+                  alert('Preencha o campo Nome.');
+                  form_cadastro.nome.focus();
+                  return false;
+            }
+            if(cpf == ""){
+                  alert('Preencha o campo CPF.');
+                  form_cadastro.cpf.focus();
+                  return false;
+            }
+            if(senha == ""){
+                  alert('Preencha o campo Senha.');
+                  form_cadastro.senha.focus();
+                  return false;
+            }
+            if(senha_confirm == ""){
+                  alert('Preencha o campo Confirmação de senha.');
+                  form_cadastro.senha_confirm.focus();
+                  return false;
+            }
+      }
+
+
+</script>
 
 
 

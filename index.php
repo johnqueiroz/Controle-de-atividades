@@ -48,15 +48,15 @@
         <form class="form" name="form_entrada" action="entrada_sistema.php" method="POST">
 
         <div class="pad">
-                  <input name="cpf_entrada" type="text" class="form-control mb-2 mr-sm-2 bord" placeholder="Digite seu CPF:">
+                  <input name="cpf_entrada" for="cpf_index" id="cpf_index" type="text" class="form-control mb-2 mr-sm-2 bord" placeholder="Digite seu CPF:">
         </div>
 
             <div class="input-group mb-2 pad">
-                    <input name="senha_entrada" autocomplete="off" type="password" class="form-control bord" placeholder="Digite sua senha:">
+                    <input name="senha_entrada" for="senha_index" id="senha_index" autocomplete="off" type="password" class="form-control bord" placeholder="Digite sua senha:">
             </div>
                 
                  
-                  <input type="submit" class="btn botao" value="Acessar">
+                  <input type="submit" onclick="return validar_index()" class="btn botao" value="Acessar">
                
         </form>
 <!--  Link para cadastro de novos usuários  -->
@@ -68,7 +68,26 @@
 
  
 
+<script>
+      function validar_index(){
 
+            var cpf_index = form_entrada.cpf_index.value;
+            var senha_index = form_entrada.senha_index.value;
+
+            if(cpf_index == ""){
+                  alert('Preencha o campo CPF.');
+                  form_entrada.cpf_index.focus();
+                  return false;
+            }
+            if(senha_index == ""){
+                  alert('Preencha o campo Senha.');
+                  form_entrada.senha_index.focus();
+                  return false;
+            }
+
+      }
+
+</script>
 
 
 

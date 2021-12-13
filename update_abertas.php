@@ -102,7 +102,7 @@
 
   <nav>
 
-      <a  href="listar_atv_conclu.php">	<img class="logo" src="vm.png" alt="Logo do Grupo"></a>
+      <a  href="listar_atv_abertas.php">	<img class="logo" src="vm.png" alt="Logo do Grupo"></a>
 
         <ul>
             <li style="color:azure;"><?php echo "Bem-vindo(a), " . $_SESSION['nome'] . '!'; ?></li> <!--recupera o nome do usuário para mostrar no menu-->
@@ -135,8 +135,8 @@
 
                  <div class="form-group col-md-6">
 
-                    <label for="inputTitulo"><b>Título da atividade</b></label>
-                    <input name="titulo" autocomplete="off" type="text" class="form-control" value="<?php echo $titulo; /*preenche o campo com o título 
+                    <label for="titulo_update"><b>Título da atividade</b></label>
+                    <input name="titulo" id="titulo_update" autocomplete="off" type="text" class="form-control" value="<?php echo $titulo; /*preenche o campo com o título 
                     já existente da atividade*/?>"  placeholder="Ex.: Um título qualquer">
                  </div>
 
@@ -179,8 +179,8 @@
 
 
               <div class="mb-4">
-                        <label for="descricao_atividade" class="form-label"><b>Descrição da atividade</b></label>
-                        <textarea type="input" class="form-control" name="descricao" rows="4"><?php echo $descricao; 
+                        <label for="descricao_update" class="form-label"><b>Descrição da atividade</b></label>
+                        <textarea type="input" id="descricao_update" class="form-control" name="descricao" rows="4"><?php echo $descricao; 
                         // preenche o textarea com as informações já disponíveis do campo no banco. OBS: precisa ser feito fora da tag, não aceita no value. 
                         ?></textarea>
               </div>
@@ -212,11 +212,11 @@
             </div>
             <div class="form-group col-md-3">
 
-              <input type="submit" style="margin-top:31px; margin-left:10px;" class="btn btn-primary" value="Editar">
+              <input type="submit" onclick="return validacao()" style="margin-top:31px; margin-left:10px;" class="btn btn-primary" value="Editar">
 
             </div>
                     <!-- campo do id "hidden" que recebe o id para enviar no formulário e o usuário não alterar -->
-            <input name="id" autocomplete="off" type="hidden" class="form-control" value="<?php echo $id;  ?>">
+            <input name="id" autocomplete="off"  type="hidden" class="form-control" value="<?php echo $id;  ?>">
 
             
         </div>    
@@ -253,6 +253,28 @@
   
 </main>
         
+
+
+<script>
+
+  function validacao(){
+
+    var titulo_update = form_update_atividades_abertas.titulo_update.value;
+    var descricao_update = form_update_atividades_abertas.descricao_update.value;
+
+    if(titulo_update == ""){
+      alert('Preencha o campo Título');
+      form_update_atividades_abertas.titulo_update.focus();
+      return false;
+    }
+    if(descricao_update == ""){
+      alert('Preencha o campo descrição');
+      form_update_atividades_abertas.descricao_update.focus();
+      return false;
+    }
+  }
+
+</script>
 
 
 <!-- bootstrap -->

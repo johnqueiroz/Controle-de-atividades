@@ -95,7 +95,7 @@
                  <div class="form-group col-md-6">
 
                     <label for="inputTitulo"><b>Título da atividade</b></label>
-                    <input name="titulo" autocomplete="off" type="text" class="form-control"  placeholder="Ex.: Um título qualquer">
+                    <input name="titulo" autocomplete="off" id="inputTitulo" type="text" class="form-control"  placeholder="Ex.: Um título qualquer">
                  </div>
 
                 <div class="form-group col-md-6">
@@ -103,7 +103,7 @@
 
                      <label for="inputTipo_atividade"><b>Tipo de atividade</b></label>
    
-                           <select name="tipo_atividade" class="form-control">
+                           <select name="tipo_atividade" id="inputTipo_atividade" class="form-control">
                               <option selected>Escolher</option>
                               <option value="1">Desenvolvimento</option>
                               <option value="2">Atendimento</option>
@@ -120,9 +120,9 @@
 
               <div class="mb-4">
                         <label for="descricao_atividade" class="form-label"><b>Descrição da atividade</b></label>
-                        <textarea class="form-control" name="descricao" rows="4"></textarea>
+                        <textarea class="form-control" id="descricao_atividade" name="descricao" rows="4"></textarea>
               </div>
-                    <input type="submit" class="btn btn-primary" value="Enviar">
+                    <input type="submit" onclick="return validar_cadastro_atv()" class="btn btn-primary" value="Enviar">
       </form>
 
     </div>
@@ -130,6 +130,33 @@
   
 </main>
         
+
+<script>
+
+  function validar_cadastro_atv(){
+
+    var titulo = form_atividades.inputTitulo.value;
+    var tipo = form_atividades.inputTipo_atividade.value;
+    var descricao = form_atividades.descricao_atividade.value;
+
+    if(titulo == ""){
+      alert('Preencha o campo Título');
+      form_atividades.inputTitulo.focus();
+      return false;
+    }
+    if(tipo == "Escolher"){
+      alert('Escolha uma opção válida no campo Tipo de atividade');
+      form_atividades.inputTipo_atividade.focus();
+      return false;
+    }
+    if(descricao == ""){
+      alert('Preencha o campo descrição');
+      form_atividades.descricao_atividade.focus();
+      return false;
+    }
+  }
+
+</script>
 
 
 
